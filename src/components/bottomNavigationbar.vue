@@ -26,19 +26,19 @@
 						{{year}}年{{month}}月{{day}}日,{{whichDay | turnWeekend }}
 					</div>
 					<div class='timeOpearator'>
-						<div class='chooseTime' @click="changeTimeMode">{{ year }}年{{ month }}月</div>
+						<div class='chooseTime' @click="changeTimeMode">{{ operatorYear }}年{{ operatorMonth +1 }}月</div>
 						<div class='prev' @click="prevTime"></div>
 						<div class='next' @click="nextTime"></div>
 					</div>
 					<rollupordown class='datatimeArea' ref="rolldiv">
 						<calendar class='prevDiv' slot='first' :year="operatorYear" :month="operatorMonth">
-							{{operatorMonth}}
+							1
 						</calendar>
-						<calendar class='centerDiv' slot='second'>
-							{{operatorMonth}}
+						<calendar class='centerDiv' slot='second' :year="operatorYear" :month="operatorMonth">
+							2
 						</calendar>
-						<calendar class='nextDiv' slot='three'>
-							{{operatorMonth}}
+						<calendar class='nextDiv' slot='three' :year="operatorYear" :month="operatorMonth">
+							3
 						</calendar>
 					</rollupordown>
 				</div>
@@ -120,11 +120,20 @@
 			//点击时间组件的向上按钮的操作
 			prevTime: function() {
 				this.$refs.rolldiv.prev();
+				this.operatorMonth = this.operatorMonth - 1;
+				if(this.operatorMonth<=0){
+					this.operatorMonth=11;
+					this.operatorYear=this.operatorYear-1;
+				}
 			},
 			//点击时间组件的向下按钮的操作
 			nextTime: function() {
 				this.$refs.rolldiv.next();
 				this.operatorMonth = this.operatorMonth + 1;
+				if(this.operatorMonth>11){
+					this.operatorMonth=0;
+					this.operatorYear=this.operatorYear+1;
+				}
 			},
 			//时间组件弹出来的时候初始化当前的选择日期
 			beforeEnter: function() {

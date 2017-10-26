@@ -2,7 +2,7 @@
 
 	<div>
 		<div class='calendarLine' v-for="(item,index) in date">
-			<div class='calendarLineItem' v-for="(item2,index2) in item">
+			<div class='calendarLineItem' v-for="(item2,index2) in item" v-bind:class="{dataActive:item2.color}">
 				{{item2.num}}
 			</div>
 		</div>
@@ -45,10 +45,8 @@
 		methods: {
 			calculatedDate: function(year, month) {
 				this.date = [];
-
 				//获取当前月第一天是周几
 				var dd = new Date(year, month, 1);
-
 				var firstDay = dd.getDay();
 				//用来获取当前月份的天数
 				var days = this.mGetDate(year, month + 1);
@@ -76,7 +74,7 @@
 				for(var i = 0; i < 5; i++) {
 					num = [];
 					for(var j = 0; j < 7; j++) {
-						if(cntday < days) {
+						if(cntday <= days) {
 							num.push({
 								num: cntday++,
 								color: true
@@ -97,6 +95,14 @@
 				var d = new Date(year, month, 0);
 				return d.getDate();
 			}
+		},
+		watch:{
+			year:function(val,oldVal){
+				this.calculatedDate(this.year,this.month);
+			},
+			month:function(val,oldVal){
+				this.calculatedDate(this.year,this.month);
+			}
 		}
 	}
 </script>
@@ -114,5 +120,8 @@
 		text-align: center;
 		flex: 1;
 		font-size: 20px;
+	}
+	.dataActive{
+		color:#fff!important;
 	}
 </style>

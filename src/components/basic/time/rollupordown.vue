@@ -34,7 +34,21 @@
 		methods: {
 			prev: function() {
 				console.log('切换上一个div');
-
+				this.index--;
+				
+				console.log(this.index);
+				if(this.index == -1) {
+					this.index = 1;
+					Velocity(this.$refs.animatedDom, {
+						marginTop: -480
+					}, {
+						duration: 0
+					})
+				}
+				var topS = this.index * -240;
+				Velocity(this.$refs.animatedDom, {
+					marginTop: topS
+				})
 			},
 			next: function() {
 				console.log("切换下一个div");
@@ -48,7 +62,6 @@
 					})
 				};
 				var topS = this.index * -240 + 'px';
-				this.topDistance.marginTop = topS;
 				Velocity(this.$refs.animatedDom, {
 					marginTop: topS
 				})
