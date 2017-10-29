@@ -26,21 +26,28 @@
 						{{year}}年{{month}}月{{day}}日,{{whichDay | turnWeekend }}
 					</div>
 					<div class='timeOpearator'>
-						<div class='chooseTime' @click="changeTimeMode">{{ operatorYear }}年{{ operatorMonth +1 }}月</div>
+						<div class='chooseTime' @click="changeTimeMode">{{ operatorYear }}年{{ operatorMonth }}月</div>
 						<div class='prev' @click="prevTime"></div>
 						<div class='next' @click="nextTime"></div>
 					</div>
-					<rollupordown class='datatimeArea' ref="rolldiv">
-						<calendar class='prevDiv' slot='first' :year="operatorYear" :month="operatorMonth">
-							1
-						</calendar>
-						<calendar class='centerDiv' slot='second' :year="operatorYear" :month="operatorMonth">
-							2
-						</calendar>
-						<calendar class='nextDiv' slot='three' :year="operatorYear" :month="operatorMonth">
-							3
-						</calendar>
-					</rollupordown>
+					<transition name='fade' mode='out-in'>
+						<rollupordown v-if='showDay' key='day' class='datatimeArea' ref="rolldiv">
+							<calendar class='prevDiv'  slot='first' :year="operatorYear" :month="operatorMonth">
+							</calendar>
+							<calendar class='centerDiv' slot='second' :year="operatorYear" :month="operatorMonth">
+							</calendar>
+							<calendar class='nextDiv' slot='three' :year="operatorYear" :month="operatorMonth">
+							</calendar>
+						</rollupordown>
+						<rollupordown2 v-else key='month' class='datatimeArea' ref="rolldiv2">
+							<calendar2 class='prevDiv' v-on:goDetaildate="goDetaildate" slot='first' :firstMonth="firstMonth" :firstYear="firstYear">
+							</calendar2>
+							<calendar2 class='centerDiv' v-on:goDetaildate="goDetaildate" slot='second' :firstMonth="firstMonth" :firstYear="firstYear">
+							</calendar2>
+							<calendar2 class='nextDiv' v-on:goDetaildate="goDetaildate" slot='three' :firstMonth="firstMonth" :firstYear="firstYear">
+							</calendar2>
+						</rollupordown2>
+					</transition>
 				</div>
 			</transition>
 		</div>
@@ -50,18 +57,23 @@
 <script>
 	import timeBlock from '@/components/basic/time/timeBlock'
 	import rollupordown from '@/components/basic/time/rollupordown'
+	import rollupordown2 from '@/components/basic/time/rollupordown2'
 	import calendar from '@/components/basic/time/calendar'
+	import calendar2 from '@/components/basic/time/calendar2'
 	export default {
 		name: "bottomNavigationbar",
 		components: {
 			timeBlock,
 			rollupordown,
-			calendar
+			rollupordown2,
+			calendar,
+			calendar2
 		},
 		data: function() {
 			return {
 				showMenu: false,
 				showpopup: false,
+				showDay: true,
 				date: new Date(),
 				timer: "",
 				year: "",
@@ -72,7 +84,9 @@
 				second: "",
 				whichDay: "",
 				operatorYear: "",
-				operatorMonth: ""
+				operatorMonth: "",
+				firstMonth: "",
+				firstYear:""
 			}
 		},
 		props: {
@@ -99,6 +113,8 @@
 			getDateInfo: function() {
 				this.year = this.date.getFullYear();
 				this.month = this.date.getMonth() + 1;
+				this.firstMonth = this.date.getMonth() + 1;
+				this.firstYear = this.date.getFullYear();
 				this.day = this.date.getDate();
 				this.whichDay = this.date.getDay();
 			},
@@ -115,30 +131,49 @@
 			},
 			//
 			changeTimeMode: function() {
-
+				this.showDay = !this.showDay;
 			},
 			//点击时间组件的向上按钮的操作
 			prevTime: function() {
-				this.$refs.rolldiv.prev();
-				this.operatorMonth = this.operatorMonth - 1;
-				if(this.operatorMonth<=0){
-					this.operatorMonth=11;
-					this.operatorYear=this.operatorYear-1;
+				if(this.showDay) {
+					this.$refs.rolldiv.prev();
+					this.operatorMonth = this.operatorMonth - 1;
+					if(this.operatorMonth <= 0) {
+						this.operatorMonth = 11;
+						this.operatorYear = this.operatorYear - 1;
+					}
+				} else {
+					this.$refs.rolldiv2.prev();
+					this.operatorYear--;
+					this.firstYear--;
 				}
+
 			},
 			//点击时间组件的向下按钮的操作
 			nextTime: function() {
-				this.$refs.rolldiv.next();
-				this.operatorMonth = this.operatorMonth + 1;
-				if(this.operatorMonth>11){
-					this.operatorMonth=0;
-					this.operatorYear=this.operatorYear+1;
+				if(this.showDay) {
+					this.$refs.rolldiv.next();
+					this.operatorMonth = this.operatorMonth + 1;
+					if(this.operatorMonth > 11) {
+						this.operatorMonth = 0;
+						this.operatorYear = this.operatorYear + 1;
+					}
+				} else {
+					this.$refs.rolldiv2.next();
+					this.operatorYear++;
+					this.firstYear++;
 				}
+
 			},
 			//时间组件弹出来的时候初始化当前的选择日期
 			beforeEnter: function() {
 				this.operatorYear = this.date.getFullYear();
-				this.operatorMonth = this.date.getMonth();
+				this.operatorMonth = this.date.getMonth()+1;
+			},
+			goDetaildate:function(time){
+				this.showDay = !this.showDay;
+				this.operatorMonth = parseInt(time.split("-")[1]);
+				this.operatorYear = parseInt(time.split("-")[0]);
 			}
 		},
 		mounted: function() {
@@ -171,16 +206,9 @@
 		background-color: #333;
 		background-image: url('../assets/image/win10HoverIcon.png');
 	}
-	
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: all .3s ease;
-	}
-	
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
-	}
+	/*
+	 * 时间弹框弹起来动画
+	 */
 	
 	.goup-enter-active,
 	.goup-leave-active {
@@ -191,6 +219,20 @@
 	.goup-leave-to {
 		transform: translateY(50px);
 		opacity: 0;
+	}
+	/*
+	 * 时间弹框里面的年月切换动画
+	 */
+	
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: all .2s ease-out;
+	}
+	
+	.fade-enter,
+	.fade-leave-to {
+		opacity: 0;
+		transform: scale(.5);
 	}
 	
 	.windowMenu {
