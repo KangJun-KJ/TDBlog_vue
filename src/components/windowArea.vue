@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class='con'>
 		我是内容区域1 {{ message }}
 	</div>
 </template>
@@ -11,6 +11,14 @@
 	}
 </script>
 
-<style type="text/css">
+<style lang="stylus">
+	font-size=14px
+
+	body 
+		font font-size Arial sans-seri
+
+ 	.con{
+ 		color white
+ 	}
 
 </style>

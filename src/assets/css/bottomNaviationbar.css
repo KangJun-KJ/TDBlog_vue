@@ -1,0 +1,229 @@
+.firstfloor>.menu {
+	float: left;
+	height: 50px;
+	width: 50px;
+	background-position: center center;
+	background-image: url('../image/win10Icon.png');
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+}
+
+.firstfloor>.menu:hover {
+	background-color: #333;
+	background-image: url('../image/win10HoverIcon.png');
+}
+	/*
+	 * 时间弹框弹起来动画
+	 */
+
+	 .goup-enter-active,
+	 .goup-leave-active {
+	 	transition: all .3s ease;
+	 }
+
+	 .goup-enter,
+	 .goup-leave-to {
+	 	transform: translateY(50px);
+	 	opacity: 0;
+	 }
+	/*
+	 * 时间弹框里面的年月切换动画
+	 */
+
+	 .fade-enter-active,
+	 .fade-leave-active {
+	 	transition: all .2s ease-out;
+	 }
+
+	 .fade-enter,
+	 .fade-leave-to {
+	 	opacity: 0;
+	 	transform: scale(.5);
+	 }
+
+	 .windowMenu {
+	 	position: fixed;
+	 	z-index: 1000;
+	 	bottom: 50px;
+	 	left: 0px;
+	 	width: 300px;
+	 	height: 500px;
+	 	background-color: rgba(0, 0, 0, .7);
+	 }
+
+	 .windowMenuActive {
+	 	background-color: #333;
+	 }
+
+	 .refreshBlock {
+	 	float: right;
+	 	height: 100%;
+	 	width: 5px;
+	 	border-left: 1px solid #fff;
+	 }
+
+	 .timeBlock {
+	 	float: right;
+	 	color: #fff;
+	 	text-align: center;
+	 	width: 100px;
+	 	height: 100%;
+	 }
+
+	 .timeBlock:hover {
+	 	background-color: #333;
+	 }
+
+	 .timeBlock p {
+	 	height: 50%;
+	 	line-height: 25px;
+	 	cursor: default;
+	 }
+
+	 .timeBlockTips {
+	 	background-color: #fff;
+	 	border: 1px solid #999;
+	 	color: #333;
+	 	position: fixed;
+	 	bottom: 50px;
+	 	right: 0;
+	 	width: 150px;
+	 	text-align: left;
+	 	text-indent: 10px;
+	 	height: 45px;
+	 	font-size: 14px;
+	 }
+
+	 .timeBlockTips>p {
+	 	line-height: 20px!important;
+	 }
+
+	 .popup-timeblock {
+	 	position: fixed;
+	 	bottom: 50px;
+	 	right: 0;
+	 	height: 450px;
+	 	width: 350px;
+	 	background-color: rgba(0, 0, 0, .7);
+	 	cursor: default;
+	 }
+
+	 .firstfloor,
+	 .secondfloor {
+	 	position: absolute;
+	 	left: 0;
+	 	top: 0;
+	 	right: 0;
+	 	bottom: 0;
+	 	z-index: 10001
+	 }
+
+	 .secondfloor {
+	 	z-index: 1000;
+	 }
+
+	 .popup-timeblock .timeClock {
+	 	height: 60px;
+	 	width: 100%;
+	 	padding: 10px 20px;
+	 	color: #fff;
+	 	font-size: 30px;
+	 	line-height: 40px;
+	 	box-sizing: border-box;
+	 	font-weight: lighter;
+	 }
+
+	 .popup-timeblock .timeInfo {
+	 	width: 100%;
+	 	padding: 0px 20px;
+	 	color: rgba(0, 120, 215, .8);
+	 	cursor: pointer;
+	 	font-size: 14px;
+	 }
+
+	 .popup-timeblock .timeInfo:hover {
+	 	color: #999;
+	 }
+
+	 .popup-timeblock .timeOpearator {
+	 	margin-top: 20px;
+	 	width: 100%;
+	 	padding: 0px 20px;
+	 	color: rgb(193, 193, 193);
+	 	font-size: 18px;
+	 	box-sizing: border-box;
+	 }
+
+	 .popup-timeblock .timeOpearator:after {
+	 	content: "";
+	 	clear: both;
+	 	display: block;
+	 }
+
+	 .chooseTime {
+	 	width: 70%;
+	 	float: left;
+	 }
+
+	 .chooseTime:hover {
+	 	color: #fff;
+	 }
+
+	 .prev,
+	 .next {
+	 	width: 15%;
+	 	height: 24px;
+	 	position: relative;
+	 	float: left;
+	 }
+
+	 .prev:hover::after,
+	 .next:hover::after {
+	 	border-color: #fff;
+	 }
+
+	 .prev:after,
+	 .next:after {
+	 	content: "";
+	 	color: #fff;
+	 	width: 15px;
+	 	height: 15px;
+	 	position: absolute;
+	 	border-top: 2px solid rgb(193, 193, 193);
+	 	border-left: 2px solid rgb(193, 193, 193);
+	 	transform-origin: center center;
+	 }
+
+	 .prev:after {
+	 	top: 7px;
+	 	left: 14px;
+	 	transform: rotate(45deg);
+	 }
+
+	 .next:after {
+	 	top: -2px;
+	 	left: 14px;
+	 	transform: rotate(-135deg);
+	 }
+
+	 .datatimeArea {
+	 	width: 310px;
+	 	height: 300px;
+	 	margin: 10px 20px;
+	 	box-sizing: border-box;
+	 }
+	 /*任务栏*/
+	 .taskbar{
+	 	float:right;
+	 	height:50px;
+	 	overflow: hidden;
+	 	vertical-align: middle;
+	 }
+	 .taskbar:hover{
+	 	background-color: #333;
+	 }
+	 .taskbar img{
+	 	margin:13px 15px;
+	 	height:24px;
+	 		
+	 }

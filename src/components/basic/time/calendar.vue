@@ -138,7 +138,7 @@
 		flex: 1;
 		font-size: 20px;
 		box-sizing: border-box;
-		border: 2px solid rgb(76, 76, 76);
+		border: 2px solid rgba(76, 76, 76,0);
 	}
 	
 	.calendarLineItem:hover {

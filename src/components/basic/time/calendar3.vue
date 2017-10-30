@@ -2,8 +2,8 @@
 
 	<div>
 		<div class='calendarLine' v-for="(item,index) in date">
-			<div class='calendarLineItem' @click='goDetailDate' :data-time="item2.time" v-for="(item2,index2) in item" v-bind:class="{dataActive:item2.color}">
-				{{item2.num}}月
+			<div class='calendarLineItem' @click='goDetailDate' :data-time="item2.num" v-for="(item2,index2) in item" v-bind:class="{dataActive:item2.color,nowYearActive:item2.nowYear}">
+				{{item2.num}}年
 			</div>
 		</div>
 	</div>
@@ -14,11 +14,6 @@
 	export default {
 		name: 'calendar',
 		props: {
-			firstMonth: {
-				default: function() {
-					return 1;
-				}
-			},
 			firstYear: {
 				default: function() {
 					return 1;
@@ -28,10 +23,10 @@
 		data: function() {
 			return {
 				date: [
-					[1, 2, 3, 4],
-					[5, 6, 7, 8],
-					[9, 10, 11, 12],
-					[1, 2, 3, 4]
+				[1, 2, 3, 4],
+				[5, 6, 7, 8],
+				[9, 10, 11, 12],
+				[1, 2, 3, 4]
 				]
 			}
 		},
@@ -43,24 +38,14 @@
 		methods: {
 			init: function() {
 				this.date = [];
-				for(var i = 1; i <= 4; i++) {
+				for(var i = 0; i < 4; i++) {
 					var num=[];
-					if(i != 4) {
-						for(var j = 1; j <= 4; j++) {
-							num.push({
-								num: i * j,
-								color: true,
-								time:this.firstYear+"-"+(i*j)
-							})
-						}
-					} else {
-						for(var j = 1; j <= 4; j++) {
-							num.push({
-								num: j,
-								color: false,
-								time:(this.firstYear+1)+"-"+(j)
-							})
-						}
+					for(var j = 0; j < 4; j++) {
+						num.push({
+							num: this.firstYear+i*4+j,
+							color: true,
+							nowYear:new Date().getFullYear()==this.firstYear+i*4+j
+						})
 					}
 					this.date.push(num);
 				}
@@ -70,9 +55,6 @@
 			}
 		},
 		watch: {
-			firstMonth: function(val, oldVal) {
-				this.init();
-			},
 			firstYear:function(val,oldVal){
 				this.init();
 			}
@@ -101,5 +83,8 @@
 	}
 	.dataActive {
 		color: #fff!important;
+	}
+	.nowYearActive{
+		background-color: rgb(0,120,215);
 	}
 </style>

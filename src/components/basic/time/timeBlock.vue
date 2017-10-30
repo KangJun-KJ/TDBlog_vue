@@ -1,11 +1,11 @@
 <template>
 	<div @mouseenter="timemouseover" @mouseout="timemouseout" @click="timeblockclick">
-		<p>15:34</p>
-		<p>2017/10/25</p>
-		<transition name="fade">
+		<p>{{hour}}:{{minute | addZero}}</p>
+		<p>{{year}}/{{month}}/{{day}}</p>
+		<transition name="showOut">
 			<div class='timeBlockTips' v-if="showTips">
-				<p>2017年10月25号</p>
-				<p>星期三</p>
+				<p>{{year}}年{{month}}月{{day}}日</p>
+				<p>星期{{ new Date().getDay() | trunWeekend }}</p>
 			</div>
 		</transition>
 	</div>
@@ -14,12 +14,11 @@
 <script>
 	export default {
 		name: "timeBlock",
+		props:["year","month","day","hour","minute"],
 		data: function() {
 			return {
 				showTips: false,
-				timer: "",
-				year: '2017',
-				month: "10"
+				timer: ""
 			}
 		},
 		methods: {
@@ -40,10 +39,27 @@
 				console.log("debug")
 				this.$emit('toggletimeblock');
 			}
+		},
+		filters:{
+			trunWeekend:function(value){
+				return "日一二三四五六".split("")[value];
+			}
+			,
+			addZero:function(value){
+				return value<10?"0"+5:value
+			}
 		}
 	}
 </script>
 
-<style>
-
+<style scoped>
+	.showOut-enter-active,
+	.showOut-leave-active {
+		transition: all .2s ease-out;
+	}
+	
+	.showOut-enter,
+	.showOut-leave-to {
+		opacity: 0;
+	}
 </style>
