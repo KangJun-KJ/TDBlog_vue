@@ -1,7 +1,7 @@
 <template>
 	<div @mouseenter="timemouseover" @mouseout="timemouseout" @click="timeblockclick">
 		<p>{{hour}}:{{minute | addZero}}</p>
-		<p>{{year}}/{{month}}/{{day}}</p>
+		<p>{{year}}/{{month }}/{{day | addZero}}</p>
 		<transition name="showOut">
 			<div class='timeBlockTips' v-if="showTips">
 				<p>{{year}}年{{month}}月{{day}}日</p>
@@ -46,7 +46,7 @@
 			}
 			,
 			addZero:function(value){
-				return value<10?"0"+5:value
+				return value<10?"0"+5:value;
 			}
 		}
 	}

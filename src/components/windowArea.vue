@@ -1,5 +1,5 @@
 <template>
-	<div class='con' @contextmenu.prevent.stop='showContextmenu' ref="contextmenuRef" >
+	<div class='con' @contextmenu.prevent.stop='showContextmenu'  >
 		我是内容区域1 {{ message }}
 	</div>
 </template>

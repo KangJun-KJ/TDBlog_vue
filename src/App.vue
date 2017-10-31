@@ -9,7 +9,7 @@
 		<bottomNavigationbar class='navigationbar'></bottomNavigationbar>
 		
 		<!--系统自带右键菜单-->
-		<contextmenu v-if="IsShowContextMenu" :styleObject="position">
+		<contextmenu v-if="IsShowContextMenu" :styleObject="position" ref="contextmenuRef">
 			
 		</contextmenu>
 		
@@ -42,6 +42,7 @@
 				message:"你好啊",
 				IsShowContextMenu:false,
 				position:{
+					width:"250px",
 					backgroundColor: "#fff",
 					left:"300px",
 					top:"200px"
@@ -54,6 +55,7 @@
 				if(x+250>window.innerWidth+2){
 					x=window.innerWidth-250-2;
 				}
+				console.log(this.$refs.contextmenuRef);
 				this.position.left=x+"px";
 				this.position.top=y+"px";
 				this.IsShowContextMenu=true;
