@@ -9,7 +9,7 @@
 
 			</div>
 			<div class='taskbar' @click="taskClick">
-				<img src="../assets/image/message.png">
+				<img src="../../../assets/image/message.png">
 			</div>
 			<time-block class='timeBlock' v-on:toggletimeblock="changepopupState" :year="year" :month="month" :day="day" :hour="hour" :minute="minute" >
 			</time-block>
@@ -249,6 +249,6 @@
 
 <style scoped lang='css'>
 
-	@import '../assets/css/bottomNaviationbar.css';
+	@import '../../../assets/css/bottomNaviationbar.css';
 
 </style>
