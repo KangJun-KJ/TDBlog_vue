@@ -1,4 +1,4 @@
-1.使用自定义事件的触发父组件事件的时候，必须使用v-on绑定，不可以简写：
+1.使用自定义事件的触发父组件事件的时候，用v-on绑定,简写是@不是:
 2.使用webpack打包css图片失败的时候，在config里index.js，添加如下：
 	assetsPublicPath: '/'
 	在build的utils.js里面，配置如下代码：

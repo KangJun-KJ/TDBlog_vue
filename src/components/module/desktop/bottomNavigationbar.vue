@@ -46,19 +46,19 @@
 						</calendar>
 					</rollupordown>
 					<rollupordown2 v-else-if="showDay==1" key='month' class='datatimeArea' ref="rolldiv2">
-						<calendar2 class='prevDiv' v-on:goDetaildate="goDetaildate" slot='first' :firstMonth="firstMonth" :firstYear="firstYear">
+						<calendar2 class='prevDiv' @goDetaildate="goDetaildate" slot='first' :firstMonth="firstMonth" :firstYear="firstYear">
 						</calendar2>
-						<calendar2 class='centerDiv' v-on:goDetaildate="goDetaildate" slot='second' :firstMonth="firstMonth" :firstYear="firstYear">
+						<calendar2 class='centerDiv' @goDetaildate="goDetaildate" slot='second' :firstMonth="firstMonth" :firstYear="firstYear">
 						</calendar2>
-						<calendar2 class='nextDiv' v-on:goDetaildate="goDetaildate" slot='three' :firstMonth="firstMonth" :firstYear="firstYear">
+						<calendar2 class='nextDiv' @goDetaildate="goDetaildate" slot='three' :firstMonth="firstMonth" :firstYear="firstYear">
 						</calendar2>
 					</rollupordown2>
 					<rollupordown2 v-else-if="showDay==2" key='year' class='datatimeArea' ref="rolldiv3">
-						<calendar3 class='prevDiv' v-on:goDetaildate="goDetailYear" slot='first' :firstYear="firstYear" >
+						<calendar3 class='prevDiv' @goDetaildate="goDetailYear" slot='first' :firstYear="firstYear" >
 						</calendar3>
-						<calendar3 class='centerDiv' v-on:goDetaildate="goDetailYear" slot='second' :firstYear="firstYear" >
+						<calendar3 class='centerDiv' @goDetaildate="goDetailYear" slot='second' :firstYear="firstYear" >
 						</calendar3>
-						<calendar3 class='nextDiv' v-on:goDetaildate="goDetailYear" slot='three' :firstYear="firstYear" >
+						<calendar3 class='nextDiv' @goDetaildate="goDetailYear" slot='three' :firstYear="firstYear" >
 						</calendar3>
 					</rollupordown2>
 				</transition>

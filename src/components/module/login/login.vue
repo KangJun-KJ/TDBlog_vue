@@ -30,22 +30,32 @@
 						<img src="../../../assets/image/login/arrowRight.png" />
 					</div>
 				</div>
+				<p class='sign'><a @click="openRegiter">Sign up</a>&nbsp;or&nbsp;<a>Forgot password?</a></p>
 			</div>
 		</transition>
+		<transition name='slideDown'>
+			<register @close="closeRegiter" v-show="showRegister"></register>
+		</transition>
+
 	</div>
 </template>
 
 <script>
 	import axios from 'axios'
 	import {loginUrl} from '@/common/config.js'
+	import register from '@/components/module/login/register'
 	export default {
 		name: 'login',
+		components:{
+			register
+		},
 		data() {
 			return {
 				showLoginInfo: false,
 				inputType: "password",
 				userName: "",
 				userPassword: "",
+				showRegister:false,
 				now: {
 					hour: "",
 					minute: "",
@@ -94,6 +104,12 @@
 					.catch(function(err) {
 						console.log(err);
 					});
+			},
+			openRegiter:function(){
+				this.showRegister=true;
+			},
+			closeRegiter:function(){
+				this.showRegister=false;
 			}
 		},
 		filters: {
@@ -146,7 +162,20 @@
 	.fade-leave-to {
 		opacity: 0
 	}
-	
+	/*注册框进入动画*/
+	.slideDown-enter-active,
+	.slideDown-leave-active{
+		transition: all .5s;
+	}
+	.slideDown-enter,.slideDown-leave-to{
+		opacity: 0;
+		transform: scale(.3,.3);
+	}
+	.slideDown-enter-to,.slideDown-leave{
+		opacity: 1
+		transform:scale(1);
+	}
+
 	.mask {
 		width: 100%;
 		height: 100%;
@@ -250,5 +279,16 @@
 	.form .eye:active .icon {
 		background-color: #007AFF;
 		fill: #fff;
+	}
+	.sign{
+		position:absolute;
+		color:#fff;
+		top: 550px;
+		left:50%;
+		transform:translateX(-50%);
+	}
+	.sign a{
+		text-decoration:underline;
+		cursor:pointer;
 	}
 </style>
