@@ -165,15 +165,12 @@
 	/*注册框进入动画*/
 	.slideDown-enter-active,
 	.slideDown-leave-active{
-		transition: all .5s;
+		transition: all .8s;
 	}
-	.slideDown-enter,.slideDown-leave-to{
+	.slideDown-enter,
+	.slideDown-leave-to {
 		opacity: 0;
-		transform: scale(.3,.3);
-	}
-	.slideDown-enter-to,.slideDown-leave{
-		opacity: 1
-		transform:scale(1);
+		margin-top:-50px;
 	}
 
 	.mask {
