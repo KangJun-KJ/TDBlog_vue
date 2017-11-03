@@ -3,7 +3,7 @@
 		<ul>
 			<li v-for="(item,index) in data" v-if="typeof item == 'object'" :class="{active:item.disabled}">
 				<div class='item1'>
-					<!-- <img :src="item.icon"> -->
+					 <img :src="item.icon"> 
 				</div>
 				<div class='item2'>
 					{{item.name}}
