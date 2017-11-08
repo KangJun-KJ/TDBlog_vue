@@ -22,59 +22,20 @@
 </template>
 
 <script>
-	export default{
-		name:"app"
+
+	export default {
+		name: 'app',
+		methods:{
+			ListenClickWindow:function(){
+				document.onmousedown=function(){
+					console.log('整个窗口都被点击了！');
+				}
+			}
+		},
+		mounted:function(){
+			this.ListenClickWindow();
+		}
 	}
-//	import windowArea from '@/components/windowArea'
-//	import bottomNavigationbar from '@/components/bottomNavigationbar'
-//	import task from '@/components/basic/task/task'
-//	import contextmenu from "@/components/basic/contextmenu/contextmenu"
-//	import {mapState} from 'vuex'
-//	export default {
-//		name: 'app',
-//		components: {
-//			HelloWorld,
-//			windowArea,
-//			bottomNavigationbar,
-//			task,
-//			contextmenu
-//		},
-//		data(){
-//			return {
-//				message:"你好啊",
-//				IsShowContextMenu:false,
-//				position:{
-//					width:"250px",
-//					backgroundColor: "#fff",
-//					left:"300px",
-//					top:"200px"
-//				}
-//			}
-//		},
-//		methods:{
-//			showContextmenu(e){
-//				var x=e.x,y=e.y;
-//				if(x+250>window.innerWidth+2){
-//					x=window.innerWidth-250-2;
-//				}
-//				console.log(this.$refs.contextmenuRef);
-//				this.position.left=x+"px";
-//				this.position.top=y+"px";
-//				this.IsShowContextMenu=true;
-//			}
-//		},
-//		mounted:function(){
-//			//第一种方法可以取出来store里面的状态值。
-//			// console.log(this.$store.state.IsOpenTaskba)
-//
-//			// console.log(this.IsOpenTaskba);
-//		},
-//		computed:{
-//			...mapState([
-//				'IsOpenTaskba'
-//			])
-//		},
-//	}
 </script>
 
 <style scoped>

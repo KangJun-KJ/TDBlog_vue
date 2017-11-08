@@ -1,6 +1,6 @@
 <template>
 	<div class='interface'>
-		<windowArea class='windowArea' :message="message" v-on:showContextmenu="showContextmenu">
+		<windowArea class='windowArea' :message="message" @showContextmenu="showContextmenu" @closeContextmenu="closeContextmenu">
 			
 		</windowArea>
 		<bottomNavigationbar class='navigationbar'></bottomNavigationbar>
@@ -53,6 +53,9 @@
 				this.position.left=x+"px";
 				this.position.top=y+"px";
 				this.IsShowContextMenu=true;
+			},
+			closeContextmenu(e){
+				this.IsShowContextMenu=false;
 			}
 		},
 		mounted:function(){
