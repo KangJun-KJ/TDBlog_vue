@@ -55,7 +55,7 @@
 				inputType: "password",
 				userName: "",
 				userPassword: "",
-				showRegister:false,
+				showRegister:true,
 				now: {
 					hour: "",
 					minute: "",
@@ -95,11 +95,13 @@
 			},
 			login() {
 				axios.post('http://passport.tdblog.com/api/login', {
-						email: '690828339@qq.com',
-						password: 'admin'
+						email: userName,
+						password: userPassword
 					})
 					.then(function(res) {
 						console.log(res);
+//						localStorage.token=res;
+						this.$router.push("/");
 					})
 					.catch(function(err) {
 						console.log(err);

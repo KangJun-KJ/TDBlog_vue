@@ -1,8 +1,8 @@
-1.使用自定义事件的触发父组件事件的时候，用v-on绑定,简写是@不是:
+﻿1.使用自定义事件的触发父组件事件的时候，用v-on绑定,简写是@不是:
 2.使用webpack打包css图片失败的时候，在config里index.js，添加如下：
 	assetsPublicPath: '/'
 	在build的utils.js里面，配置如下代码：
 	ExtractTextPlugin.extract({
 		publicPath: '../../'
       })
-	
+3.在run dev过程不会自动补css3前缀，在build之后会自动补满前缀。

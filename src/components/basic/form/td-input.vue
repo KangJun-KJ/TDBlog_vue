@@ -1,7 +1,7 @@
 <template>
 	<div class='td-content'>
 		<div class="td-text" v-show="!text.length">{{td_text}}</div>
-		<input class='td-input' v-model="text" @focus="inputfoucs" @blur="inputblur"></input>
+		<input class='td-input' v-model="text" @focus="inputfoucs" @blur="inputblur" @input="change"></input>
 		<img class='td-name' :src="inputType[input_type]">
 		<div>
 			<div class="td-line">
@@ -42,11 +42,20 @@
 		},
 		methods:{
 			inputfoucs:function(){
-				console.log(12);
 				this.foucs=true;
 			},
 			inputblur:function(){
 				this.foucs=false;
+			},
+			change(e){
+				this.$emit("change",this.text);
+			}
+		},
+		directives:{
+			focus:{
+				inserted(el){
+					el.focus();
+				}
 			}
 		}
 	}

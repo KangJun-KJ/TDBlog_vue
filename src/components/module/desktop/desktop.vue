@@ -64,6 +64,11 @@
 
 			// console.log(this.IsOpenTaskba);
 		},
+		beforeCreate(){
+			if(!localStorage.token){
+				this.$router.push({ path: '/login' })
+			}
+		},
 		computed:{
 			...mapState([
 				'IsOpenTaskba'
